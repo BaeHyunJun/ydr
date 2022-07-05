@@ -1,3 +1,44 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": ["airbnb", "plugin:prettier/recommended", "next/core-web-vitals"],
+  "plugins": ["testing-library"],
+  "overrides": [
+    // Only uses Testing Library lint rules in test files
+    {
+      "files": [
+        "**/__tests__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[jt]s?(x)"
+      ],
+      "extends": ["plugin:testing-library/react"]
+    },
+    // Next.js needs default exports for pages and API points
+    {
+      "files": [
+        "pages/*",
+        "pages/api/*"
+      ],
+      "rules": {
+//        "no-restricted-exports": ["error", { "restrictedNamedExports": ["default", "Home"] }]
+      }
+    }
+  ],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "react/jsx-filename-extension": [1, { "allow": "as-needed", "extensions":[".tsx"] }],
+//    "react/unused-default-export": [1, {}],
+
+    //    "react/jsx-filename-extension": [
+    //      "error",
+    //      {
+    //        "extensions": [".js", ".jsx"]
+    //      }
+    //    ],
+    "max-len": ["error", { "code": 120 }],
+    "react/jsx-max-props-per-line" : "off",
+    "react/jsx-props-no-spreading" : "off",
+    "react/function-component-definition" : "off",
+    "max-line-length": "off",
+    "no-unexpected-multiline": "error"
+    //    "max-len": "off"
+  }
 }
